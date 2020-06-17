@@ -1,0 +1,45 @@
+{% extends "todo/base.html" %}
+{% load static %}
+{% block title %}
+    Current To-dos Page
+{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            {% if todos %}
+                 <h2>Created {{ todos.count }} Todo{{ todos.count|pluralize }} </h2>
+            {% else %}
+                <h1>Current Todos</h1>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+{#    <ul>#}
+{#        {% for todo in todos %}#}
+{#        <li>#}
+{#            <a href="{% url 'get_todo' todo.id %}"></a>#}
+{#            {% if todo.important %} <b>{% endif %}{{ todo.title }}{% if todo.important %} </b>{% endif %}#}
+{#            {% if todo.notes %} --{{ todo.notes }} {% endif %}#}
+{#        </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+        {% if todos %}
+            <div class="list-group">
+                {% for todo in todos %}
+                    <a href="{% url 'get_todo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-danger{% endif %}"><b>{{ todo.title }}</b>{% if todo.notes %} - {{ todo.notes|truncatechars:26 }}{% endif %}</a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center">
+                <h2>Looks like you don't have any todos! Let's create it.</h2>
+            <br>
+            <a role="button" class="btn btn-primary" href="{% url 'create_todo' %}">New Todo</a>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

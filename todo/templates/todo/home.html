@@ -1,0 +1,18 @@
+{% extends "todo/base.html" %}
+{% load static %}
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block body %}
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-7 text-center">
+
+                 <h1>Your Own Todo App!</h1>
+                 <h3>Plan your day like; keep it simple & make it fast</h3>
+        <a role="button" class="btn btn-primary btn-lg" href="{% url 'signup_user' %}">Get Started</a>
+        </div>
+    </div>
+
+{% endblock %}

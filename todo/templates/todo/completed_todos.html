@@ -1,0 +1,28 @@
+{% extends "todo/base.html" %}
+{% load static %}
+{% block title %}
+    Completed To-dos Page
+{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            <h2>Completed {{ todos.count }} Todo{{ todos.count|pluralize }} </h2>
+        </div>
+    </div>
+    <hr>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-10">
+            <div class="list-group">
+                {% for todo in todos %}
+                    <a href="{% url 'get_todo' todo.id %}" class="list-group-item list-group-item-action{% if todo.important %} list-group-item-success{% endif %}"><b>{{ todo.title }}</b> - Completed {{ todo.completedDate|date:'d M Y H:i' }}</a>
+
+{#                    <a href="{% url 'get_todo' todo.id %}"></a>#}
+{#                    {% if todo.important %} <b>{% endif %}{{ todo.title }}{% if todo.important %} </b>{% endif %}#}
+{#                    {% if todo.notes %} --{{ todo.notes }} {% endif %}#}
+{#                    {{ todo.completedDate|date:'M j Y H:i' }}#}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
