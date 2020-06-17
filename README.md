@@ -1,4 +1,4 @@
-# Todo
+# Todo Web App
 How to create your own Todo web application using Python's web Framework (Django3) + HTML5 + CSS3 + Relational Database
 
 You can start your day with planned tasks. It allows setting an important task while creating. This simple web application allows you to create, update, complete, and close your tasks.  
