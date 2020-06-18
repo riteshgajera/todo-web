@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from todo import views
 
+app_name = 'todo'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
 
@@ -34,3 +36,4 @@ urlpatterns = [
     path('todo/<int:todo_pk>/complete', views.complete_todo, name='complete_todo'),
     path('todo/<int:todo_pk>/delete', views.delete_todo, name='delete_todo'),
 ]
+handler404 = 'todo.views.page_not_found'

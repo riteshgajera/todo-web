@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
@@ -77,9 +78,14 @@ def create_todo(request):
             return render(request, 'todo/create_todo.html', {'form': TodoForm(), 'error': 'Invalid input data, Try '
                                                                                           'again!'})
 
+
 @login_required
 def get_todo(request, todo_pk):
-    todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
+    try:
+        todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
+    except Todo.DoesNotExist:
+        raise Http404("Todo does not exist")
+
     if request.method == 'GET':
         form = TodoForm(instance=todo)
         return render(request, 'todo/view_todo.html', {'todo': todo, 'form': form})
@@ -100,6 +106,7 @@ def complete_todo(request, todo_pk):
         todo.save()
         return redirect('current_todos')
 
+
 @login_required
 def delete_todo(request, todo_pk):
     todo = get_object_or_404(Todo, pk=todo_pk, user=request.user)
@@ -112,3 +119,7 @@ def delete_todo(request, todo_pk):
 def completed_todos(request):
     todos = Todo.objects.filter(user=request.user, completedDate__isnull=False).order_by('-completedDate')
     return render(request, 'todo/completed_todos.html', {'todos': todos})
+
+
+def page_not_found(request, exception):
+    return render(request, 'todo/error.html', {'message': "Seems,The page you are trying to reach doesn't exist."})

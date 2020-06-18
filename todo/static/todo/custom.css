@@ -1,8 +1,7 @@
-body {
-    font-family: 'Nunito', sans-serif;
+.navbar-light .navbar-nav .nav-link {
+    color: #e9ecef !important;
 }
 
-
-.navbar-light .navbar-nav .nav-link {
-    color: #f8f9fa !important;
+body {
+    font-family: 'Nunito', sans-serif;
 }
